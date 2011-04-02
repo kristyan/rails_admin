@@ -349,7 +349,7 @@ module RailsAdmin
         options.delete(:offset)
         options.delete(:limit)
       end
-      @record_count = Rails.cache.fetch("#{@abstract_model.model.table_name}_count", :expires_in => 3600*24) { @abstract_model.count(options, scope) }
+      @record_count = Rails.cache.fetch("#{@abstract_model.model.table_name}_count", :expires_in => 3600*48) { @abstract_model.count(options, scope) }
       @current_search_field = (params[:field] || "all").to_sym
       @page_type = @abstract_model.pretty_name.downcase
       @page_name = t("admin.list.select", :name => @model_config.label.downcase)
