@@ -33,7 +33,7 @@ module RailsAdmin
       def count(options = {}, scope = nil)
         scope ||= model
         Rails.cache.fetch("#{model.table_name}_count", :expires_in => 3600*48) do
-          scope.count(options.reject{|key, value| [:sort, :sort_reverse].include?(key)} )
+          scope.count(options.reject{|key, value| [:sort, :sort_reverse].include?(key)})
         end
       end
 
