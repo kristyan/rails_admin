@@ -32,7 +32,9 @@ module RailsAdmin
 
       def count(options = {}, scope = nil)
         scope ||= model
-        scope.count(options.reject{|key, value| [:sort, :sort_reverse].include?(key)})
+        Rails.cache.fetch("#{model.table_name}_count", :expires_in => 3600) do
+          scope.count(options.reject{|key, value| [:sort, :sort_reverse].include?(key)})
+        end
       end
 
       def first(options = {}, scope = nil)
